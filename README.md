@@ -1,54 +1,142 @@
-# React + TypeScript + Vite
+# Управление палитрами
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Обзор
 
-Currently, two official plugins are available:
+Этот проект представляет собой приложение на TypeScript с использованием React, разработанное для управления цветовыми палитрами с использованием типобезопасной системы. Оно позволяет создавать базовые тона, вариации яркости, глубины и контраста, комбинируя их в комплексную систему палитр. Приложение использует современные веб-технологии и включает модульные тесты для обеспечения надежности.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Структура проекта
 
-## Expanding the ESLint configuration
+### Структура директорий
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+palette-management/
+├── node_modules/          # Зависимости, установленные через npm
+├── public/               # Статические ресурсы (например, index.html)
+├── src/                  # Исходный код
+│   ├── atoms/            # Базовые строительные блоки
+│   │   ├── colors.ts     # Определяет базовые цвета (например, красный, зеленый, синий, желтый)
+│   │   └── types.ts      # Определения типов для цветов и тонов
+│   ├── molecules/        # Повторно используемые компоненты или логика
+│   │   ├── createTone.ts # Фабрика для создания объектов тонов
+│   │   └── tonePresets.ts # Предопределенные конфигурации тонов (baseTone, brightness, depths, contrast)
+│   ├── organisms/        # Компоненты или логика более высокого уровня
+│   │   └── createPalette.ts # Основная логика создания палитры
+│   ├── components/       # React-компоненты
+│   │   ├── colorSystem/  # Компоненты, связанные с системой цветов
+│   │   │   └── organisms/
+│   │   │       └── palettePresets.ts # Экспортирует appPalette и appPaletteContrast
+│   │   └── App.tsx       # Основной React-компонент, отображающий палитры
+│   ├── tests/            # Файлы тестов
+│   │   └── palette.test.ts # Юнит-тесты для createTone и createPalette
+│   ├── App.css           # Глобальные CSS-стили
+│   ├── index.css         # Дополнительные стили
+│   ├── main.tsx          # Точка входа для React-приложения
+│   ├── vite-env.d.ts     # Объявления окружения TypeScript для Vite
+│   ├── .gitignore        # Файл игнорирования Git
+│   ├── eslint.config.js  # Конфигурация ESLint
+│   ├── index.html        # HTML-шаблон
+│   ├── package-lock.json # Файл блокировки зависимостей
+│   ├── package.json      # Метаданные проекта и скрипты
+│   ├── README.md         # Этот файл
+│   ├── tsconfig.json     # Конфигурация TypeScript
+│   ├── tsconfig.node.json # Конфигурация TypeScript для Node
+│   └── vite.config.ts    # Конфигурация Vite
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Ключевые файлы и их роли
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **`atoms/colors.ts`**: Определяет объект `baseColors` с начальными данными цветов (например, красный, зеленый, синий, желтый) и связанные типы.
+- **`atoms/types.ts`**: Содержит определения типов, такие как `ColorData`, `InputModel`, `ToneCallback` и `SubtonesConfig`.
+- **`molecules/createTone.ts`**: Реализует функцию `createTone` для создания типобезопасных объектов тонов с необязательными подтонами.
+- **`molecules/tonePresets.ts`**: Экспортирует предопределенные тоны (например, `baseTone`, `brightness`, `depths`, `contrast`).
+- **`organisms/createPalette.ts`**: Реализует функцию `createPalette` для генерации палитры путем комбинирования базовых цветов и тонов.
+- **`components/colorSystem/organisms/palettePresets.ts`**: Экспортирует `appPalette` и `appPaletteContrast` с использованием `createPalette`.
+- **`App.tsx`**: Основной React-компонент, отображающий сетку карточек с данными палитры.
+- **`tests/palette.test.ts`**: Содержит юнит-тесты для `createTone` и `createPalette` с использованием Vitest.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## Начало работы
+
+### Предварительные требования
+
+- Node.js (версия 14.x или выше)
+- npm (обычно поставляется с Node.js)
+
+### Установка
+
+1. Склонируйте репозиторий:
+   ```bash
+   git clone <url-репозитория>
+   cd palette-management
+   ```
+2. Установите зависимости:
+   ```bash
+   npm install
+   ```
+
+### Запуск проекта
+
+1. Запустите сервер разработки:
+
+   ```bash
+   npm run dev
+   ```
+
+   - Это запустит приложение по адресу `http://localhost:5173` (или другому порту, если указано).
+
+2. Сборка проекта для продакшена:
+
+   ```bash
+   npm run build
+   ```
+
+   - Это создаст готовую для продакшена сборку в директории `dist`.
+
+3. Предпросмотр сборки для продакшена:
+
+   ```bash
+   npm run preview
+   ```
+
+4. Запуск тестов:
+   ```bash
+   npm test
+   ```
+   - Это выполнит юнит-тесты с использованием Vitest.
+
+### Линтинг
+
+Для проверки и обеспечения качества кода:
+
+```bash
+npm run lint
 ```
+
+## Использование
+
+- Приложение отображает две палитры (`appPalette` и `appPaletteContrast`) в виде сетки.
+- Каждая карточка показывает ключ (например, `blue`, `blue_brightness`) и связанные данные цвета в формате JSON.
+- Система расширяема; вы можете добавить новые цвета в `baseColors` или новые тоны в `tonePresets.ts`.
+
+## Тестирование
+
+- Юнит-тесты находятся в `tests/palette.test.ts`.
+- Тесты покрывают создание тонов и палитр, обеспечивая правильную структуру и данные.
+- Выполните `npm test` для запуска тестов и просмотра результатов.
+
+## Участие в разработке
+
+1. Сделайте форк репозитория.
+2. Создайте новую ветку: `git checkout -b feature-branch`.
+3. Внесите изменения и зафиксируйте: `git commit -m "Добавить новую функцию"`.
+4. Отправьте изменения в ветку: `git push origin feature-branch`.
+5. Отправьте пул-реквест.
+
+## Лицензия
+
+Этот проект лицензирован под лицензией MIT - см. файл [LICENSE](LICENSE) для деталей.
+
+## Благодарности
+
+- Создано с использованием [Vite](https://vitejs.dev/), [React](https://reactjs.org/) и [TypeScript](https://www.typescriptlang.org/).
+- Стилизация с помощью [@emotion/styled](https://emotion.sh/docs/styled).
+- Тестирование с [Vitest](https://vitest.dev/).
