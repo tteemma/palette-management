@@ -1,7 +1,5 @@
 # Управление палитрами
 
-## Обзор
-
 Тестовое задание для [БКХ Еком](https://calendly.com/sharapova-natalia-v/meet-with-me)
 
 ## Структура проекта
