@@ -2,14 +2,23 @@
 
 ## Тестовое задание для [БКХ Еком](https://perm.hh.ru/vacancy/121265408?hhtmFrom=employer_vacancies)
 
+<<<<<<< HEAD
 ### Структура
+=======
+
+### Структура 
+>>>>>>> 082f5dffccb573d027e6c0b1558503d084d06ea5
 
 ```
 palette-management/
 ├── node_modules/
 ├── public/
 ├── src/
+<<<<<<< HEAD
 │   ├── assets/
+=======
+│   ├── assets/                                 
+>>>>>>> 082f5dffccb573d027e6c0b1558503d084d06ea5
 │   ├── components/
 │   │   └── colorSystem/
 │   │       ├── __tests__/                       # Тесты для colorSystem
@@ -23,11 +32,19 @@ palette-management/
 │   │       └── organisms/
 │   │           ├── createPalette.ts             # Основная логика сборки палитры
 │   │           └── palettePresets.ts            # Экспортирует appPalette, appPaletteContrast и др.
+<<<<<<< HEAD
 │   ├── App.css
 │   ├── App.tsx
 │   ├── index.css
 │   ├── main.tsx
 │   ├── vite-env.d.ts
+=======
+│   ├── App.css                                  
+│   ├── App.tsx                                  
+│   ├── index.css                                
+│   ├── main.tsx                                 
+│   ├── vite-env.d.ts                            
+>>>>>>> 082f5dffccb573d027e6c0b1558503d084d06ea5
 ├── .gitignore
 ├── eslint.config.js
 ├── index.html
