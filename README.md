@@ -1,6 +1,6 @@
 # Управление палитрами
 
-## Тестовое задание для [БКХ Еком](https://calendly.com/sharapova-natalia-v/meet-with-me)
+## Тестовое задание для [БКХ Еком](https://perm.hh.ru/vacancy/121265408?hhtmFrom=employer_vacancies)
 
 
 ### Структура 
