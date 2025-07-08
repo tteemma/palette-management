@@ -1,44 +1,45 @@
 # Управление палитрами
 
-Тестовое задание для [БКХ Еком](https://calendly.com/sharapova-natalia-v/meet-with-me)
+## Тестовое задание для [БКХ Еком](https://calendly.com/sharapova-natalia-v/meet-with-me)
 
-## Структура проекта
 
-### Структура директорий
+### Структура 
 
 ```
 palette-management/
 ├── node_modules/
 ├── public/
 ├── src/
-│   ├── atoms/                         # Базовые строительные блоки
-│   │   ├── colors.ts                  # Определяет базовые цвета (например, красный, зеленый, синий, желтый)
-│   │   └── types.ts                   # Определения типов для цветов и тонов
-│   ├── molecules/                     # Повторно используемые компоненты или логика
-│   │   ├── createTone.ts              # Фабрика для создания объектов тонов
-│   │   └── tonePresets.ts             # Предопределенные конфигурации тонов (baseTone, brightness, depths, contrast)
-│   ├── organisms/                     # Компоненты или логика более высокого уровня
-│   │   └── createPalette.ts           # Основная логика создания палитры
+│   ├── assets/                                 
 │   ├── components/
-│   │   ├── colorSystem/
-│   │   │   └── organisms/
-│   │   │       └── palettePresets.ts  # Экспортирует appPalette и appPaletteContrast
-│   │   └── App.tsx                    # Основной React-компонент, отображающий палитры
-│   ├── tests/                         # Файлы тестов
-│   │   └── palette.test.ts            # Юнит-тесты для createTone и createPalette
-│   ├── App.css                        # Глобальные CSS-стили
-│   ├── index.css                      # Дополнительные стили
-│   ├── main.tsx                       # Точка входа для React-приложения
-│   ├── vite-env.d.ts                  # Объявления окружения TypeScript для Vite
+│   │   └── colorSystem/
+│   │       ├── __tests__/                       # Тесты для colorSystem
+│   │       │   └── palette.test.ts              # Юнит-тесты для createTone и createPalette
+│   │       ├── atoms/
+│   │       │   ├── colors.ts                    # Базовые цвета (InputModel)
+│   │       │   └── types.ts                     # Типы для цветов и тонов
+│   │       ├── molecules/
+│   │       │   ├── createTone.ts                # Фабрика для создания объектов тонов
+│   │       │   └── tonePresets.ts               # Предопределённые тона (baseTone, brightness, depths)
+│   │       └── organisms/
+│   │           ├── createPalette.ts             # Основная логика сборки палитры
+│   │           └── palettePresets.ts            # Экспортирует appPalette, appPaletteContrast и др.
+│   ├── App.css                                  
+│   ├── App.tsx                                  
+│   ├── index.css                                
+│   ├── main.tsx                                 
+│   ├── vite-env.d.ts                            
 ├── .gitignore
 ├── eslint.config.js
 ├── index.html
 ├── package-lock.json
 ├── package.json
 ├── README.md
+├── tsconfig.app.json
 ├── tsconfig.json
 ├── tsconfig.node.json
 ├── vite.config.ts
+
 ```
 
 ### Ключевые файлы и их роли
